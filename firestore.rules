@@ -1,0 +1,27 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Quiz Cache: readable by authenticated users (sans answers via API), writable only by server
+    match /quizCache/{key} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+    // Certificates: Block direct client reads and writes. Access via server APIs only.
+    match /certificates/{id} {
+      allow read: if false;
+      allow write: if false; // block client writes
+    }
+
+    // Optional: Admin override using custom claims (set in Firebase Auth)
+    // match /certificates/{id} {
+    //   allow write: if request.auth.token.admin == true;
+    // }
+
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
+
+
