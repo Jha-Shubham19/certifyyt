@@ -28,8 +28,9 @@ export default async function CertificatePage({ params }: CertificatePageProps) 
       </div>
     )
   }
-  
-  const certificateUrl = `${window.location.origin}/certificates/${certificate.id}`; // In a real app, use env var for domain
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:9002');
+  const certificateUrl = `${baseUrl}/certificates/${certificate.id}`; // In a real app, use env var for domain
+  // const certificateUrl = `${window.location.origin}/certificates/${certificate.id}`; // In a real app, use env var for domain
 
   return (
     <div className="container py-12 space-y-8 overflow-hidden max-h-[calc(100vh-8rem)] sm:max-h-none">

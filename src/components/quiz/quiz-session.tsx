@@ -47,7 +47,7 @@ export function QuizSession({ mcqs, onFinish }: QuizSessionProps) {
   };
 
   return (
-    <Card className="w-full max-w-4xl mx-auto glass-effect shadow-2xl border border-white/10 overflow-hidden">
+    <Card className="w-full max-w-4xl mx-auto glass-effect shadow-2xl border border-white/10 overflow-hidden select-none">
       <CardHeader className="pb-2 sm:pb-6">
         <div className="space-y-4">
           <div className="flex items-center justify-between">

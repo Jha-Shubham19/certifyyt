@@ -18,8 +18,9 @@ import { CheckCircle, Info, RefreshCw, XCircle } from "lucide-react";
 import { Button } from "../ui/button";
 import { CertificateDisplay } from "../certificate/certificate-display";
 import { useAuth } from "@/hooks/use-auth";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { getAuth } from "firebase/auth";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -45,11 +46,11 @@ export function QuizResults({ mcqs, userAnswers, videoTitle, onRetry }: QuizResu
   const [submitting, setSubmitting] = useState(false);
   const [showAlreadyCert, setShowAlreadyCert] = useState(false);
 
-  const submitToServer = async () => {
+  const submitToServer = useCallback(async () => {
     if (!user || submitting) return;
     setSubmitting(true);
     try {
-      const idToken = await (await import("firebase/auth")).getAuth().currentUser?.getIdToken();
+      const idToken = await getAuth().currentUser?.getIdToken();
       if (!idToken) throw new Error("Not authenticated");
       
       // Get the YouTube URL from the current page URL
@@ -79,11 +80,16 @@ export function QuizResults({ mcqs, userAnswers, videoTitle, onRetry }: QuizResu
     } finally {
       setSubmitting(false);
     }
-  };
+  }, [user, submitting]);
+
+  // Trigger server validation when entering results view
+  useEffect(() => {
+    if (!serverResult && user) {
+      submitToServer();
+    }
+  }, [serverResult, user, submitToServer]);
 
   if (!serverResult) {
-    // Trigger server validation when entering results view
-    submitToServer();
     return (
       <Card className="w-full max-w-3xl mx-auto">
         <CardHeader className="text-center">
