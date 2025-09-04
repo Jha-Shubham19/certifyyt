@@ -9,6 +9,10 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        "custom-sc-xs": "340px", 
+        "custom-sc-sm": "420px",
+      },
       fontFamily: {
         body: ['Inter', 'sans-serif'],
         headline: ['Inter', 'sans-serif'],

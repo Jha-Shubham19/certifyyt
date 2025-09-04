@@ -1,8 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import { UserNav } from "@/components/auth/user-nav";
 // import { BrainCircuit } from "lucide-react";
 import CertifyYTLogo from "@/components/shared/certifyyt-logo";
+import { useAuth } from "@/hooks/use-auth";
+
 export function Header() {
+  const { user } = useAuth();
   return (
     <header className="sticky top-0 z-50 w-full glass-effect border-b border-white/10 shadow-lg transition-all duration-300">
     <div className="container grid grid-cols-2 sm:grid-cols-3 items-center h-16 sm:h-20 px-4 sm:px-6 lg:px-8 mx-auto">
@@ -31,12 +36,14 @@ export function Header() {
         >
           Home
         </Link>
-        <Link
-          href="/dashboard"
-          className="text-foreground/80 hover:text-foreground transition-colors duration-300 font-medium"
-        >
-          Dashboard
-        </Link>
+        {user && (
+            <Link
+              href="/dashboard"
+              className="text-foreground/80 hover:text-foreground transition-colors duration-300 font-medium"
+            >
+              Dashboard
+            </Link>
+          )}
       </nav>
   
       {/* Right Section - User Nav */}

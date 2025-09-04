@@ -138,7 +138,7 @@ export function CertificateDisplay({ videoTitle, score, certificateId }: Certifi
             Download Certificate
             </Button>
         </div>
-        <div className="flex justify-center scale-[.40] xs:scale-50 sm:scale-75 md:scale-90 lg:scale-100 origin-top px-2">
+          <div className="flex justify-center scale-[.30] custom-sc-xs:scale-[0.35] custom-sc-sm:scale-[0.40] sm:scale-75 md:scale-90 lg:scale-100 origin-top px-2">
           <div ref={certificateRef}>
              <CertificateTemplate certificate={certificate} certificateUrl={certificateUrl} />
           </div>
@@ -163,7 +163,7 @@ export function CertificateDisplay({ videoTitle, score, certificateId }: Certifi
             id="name"
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
-            placeholder="e.g., Alex Doe"
+            placeholder="e.g. Sahil Jadhav"
           />
         </div>
         <Button onClick={handleGenerateCertificate} className="w-full">

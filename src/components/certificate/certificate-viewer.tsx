@@ -73,7 +73,7 @@ export function CertificateViewer({ certificate, certificateUrl }: CertificateVi
           Download Certificate
         </Button>
       </div>
-      <div className="flex justify-center scale-[.40] xs:scale-50 sm:scale-75 md:scale-90 lg:scale-100 origin-top p-2 w-auto object-contain">
+      <div className="flex justify-center scale-[.32] custom-sc-xs:scale-[0.37] custom-sc-sm:scale-[.45] sm:scale-75 md:scale-90 lg:scale-100 origin-top p-2 w-auto object-contain">
         <div ref={certificateRef}>
           <CertificateTemplate certificate={certificate} certificateUrl={certificateUrl} />
         </div>
