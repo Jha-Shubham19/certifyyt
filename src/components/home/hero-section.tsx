@@ -44,8 +44,8 @@ export function HeroSection() {
             Unlock Your YouTube Certificate
           </CardTitle>
           <CardDescription className="text-sm sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Transform any YouTube video or playlist into a certified learning experience. 
-            Take our AI-powered quiz and earn your official certificate.
+            {/* Transform any YouTube video or playlist into a certified learning experience.  */}
+            Take our AI-powered quiz and earn your official Youtube learning certificate.
           </CardDescription>
         </CardHeader>
 
