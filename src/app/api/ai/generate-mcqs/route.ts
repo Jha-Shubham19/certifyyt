@@ -30,17 +30,56 @@ export async function POST(req: NextRequest) {
 }
 
 async function generateMCQsWithGemini(videoTitle: string): Promise<MCQ[]> {
-  const prompt = `Generate exactly 10 unique, relevant, and medium level multiple-choice questions based on the following YouTube video title(s): "${videoTitle}".
-The question must:
-- Be strictly based on the topic of the video title.
-- Be simple and understandable for medium level learners.
-- Not repeat any previous question.
-- Provide exactly 4 unique options.
-- Clearly indicate the correct answer.
-- Use English only.
-- Exactly 10 questions.
+//   const prompt = `Generate exactly 10 unique, relevant, and medium level multiple-choice questions based on the following YouTube video title(s): "${videoTitle}".
+// The question must:
+// - Be strictly based on the topic of the video title.
+// - Be simple and understandable for medium level learners.
+// - Not repeat any previous question.
+// - Provide exactly 4 unique options.
+// - Clearly indicate the correct answer.
+// - Use English only.
+// - Exactly 10 questions.
 
-Output strictly and only in valid JSON format as follows:
+// Output strictly and only in valid JSON format as follows:
+// [
+//   {
+//     "question": "...",
+//     "options": ["...", "...", "...", "..."],
+//     "answer": "..."
+//   }
+// ]`;
+const prompt = `Generate exactly 10 unique, relevant, medium-level multiple-choice questions strictly based on the concepts, topics, acadmic or technical knowledge taught in the content represented by the following YouTube video title(s): "${videoTitle}".
+
+The questions must:
+- Be derived only from the subject matter, concepts, and lessons covered in the topic.
+- NOT reference the video, its title, the instructor, or any video-related context.
+- Be concept-focused, not meta or descriptive of the video.
+- Be clear and understandable for medium-level learners.
+- Not repeat any question or concept already used.
+- Provide exactly 4 distinct answer options.
+- Clearly specify the correct answer.
+- Use English only.
+- Generate exactly 10 questions.
+Strict rules:
+- Treat the topic as a subject or syllabus, NOT as a video or media content.
+- Questions MUST be directly about the topic itself.
+- DO NOT mention or imply:
+  - videos
+  - titles
+  - lessons
+  - instructors
+  - explanations shown anywhere
+- Do NOT use phrases like:
+  - "based on the video"
+  - "as discussed above"
+  - "in this lesson"
+- Questions must stand alone as pure topic-based knowledge checks.
+- Do not repeat questions or concepts.
+- Each question must have exactly 4 unique options.
+- Use English only.
+- Output exactly 10 questions.
+
+Output strictly and only in valid JSON format as shown below:
 [
   {
     "question": "...",
